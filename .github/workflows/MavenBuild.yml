@@ -1,0 +1,38 @@
+name: Maven Build
+
+on:
+  push:
+    branches:
+      - master  # 替换为你项目的主分支名称
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. 设置 Java 环境（根据 pom.xml 中的 Java 版本）
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'  # 替换为你项目所需的 Java 版本（例如 11、17、20）
+          distribution: 'temurin'  # 使用 Temurin 提供的 JDK
+
+      # 3. 缓存 Maven 依赖（可选，加速构建）
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      # 4. 运行 Maven 构建
+      - name: Build with Maven
+        run: mvn -B clean install
