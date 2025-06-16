@@ -39,6 +39,6 @@ jobs:
 
       - name: JAR
         run: |
-          cp target/*.jar .
+          cp $GITHUB_WORKSPACE/target/*.jar $GITHUB_WORKSPACE/
       - name: LIST
         run: ls -l
