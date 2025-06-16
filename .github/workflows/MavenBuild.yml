@@ -37,7 +37,8 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean install
 
-      - name: Create tar.gz archive
+      - name: JAR
         run: |
-          mkdir -p tar
-          tar -czvf tar/pv4.4.4.tar.gz -C target pv4.4.4.jar  # 替换为实际的 JAR 文件名
+          cp target/*.jar .
+      - name: LIST
+        run: ls -l
