@@ -38,7 +38,7 @@ jobs:
         run: mvn -B clean install
 
       - name: JAR
-        run: |
-          cp $GITHUB_WORKSPACE/target/*.jar $GITHUB_WORKSPACE/
-      - name: LIST
-        run: ls -l
+        uses: actions/upload-artifact@v4
+        with: 
+          name: PlayerVaultsX.jar
+        path: target/PlayerVaultsX.jar
