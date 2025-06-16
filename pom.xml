@@ -38,13 +38,16 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.4.2</version>
                 <configuration>
+                    <outputDirectory>${project.basedir}/target</outputDirectory> <!-- 输出到项目根目录 -->
+                </configuration>
+<!--                 <configuration>
                     <archive>
                         <manifestEntries>
                             <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
                         </manifestEntries>
                     </archive>
-                </configuration>
-            </plugin>
+                </configuration> -->
+            </plugin>		
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
