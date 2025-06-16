@@ -15,11 +15,11 @@ jobs:
     steps:
       # 1. 检出代码
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 2. 设置 Java 环境（根据 pom.xml 中的 Java 版本）
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '21'  # 替换为你项目所需的 Java 版本（例如 11、17、20）
           distribution: 'temurin'  # 使用 Temurin 提供的 JDK
@@ -37,20 +37,20 @@ jobs:
       - name: Build with Maven
         run: mvn -B clean install
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          tag_name: 4.4.4  # 使用推送的标签名
-          release_name: Release 4.4.4
-          body: 'Automated release for tag 4.4.4'
-          draft: false
-          prerelease: false
-
-      - name: Upload JAR to Release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: target/pv4.4.4.jar  # 替换为实际的 JAR 文件路径
-          asset_name: pv4.4.4.jar
-          asset_content_type: application/java
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: 4.4.4  # 使用推送的标签名
+          release_name: Release 4.4.4
+          body: 'Automated release for tag 4.4.4'
+          draft: false
+          prerelease: false
+ 
+      - name: Upload JAR to Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/pv4.4.4.jar  # 替换为实际的 JAR 文件路径
+          asset_name: pv4.4.4.jar
+          asset_content_type: application/java
